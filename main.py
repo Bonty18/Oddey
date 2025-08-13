@@ -4,10 +4,8 @@ import os
 
 app = Flask(__name__, static_folder='static', template_folder='templates')
 
-cookie_value = os.getenv('YT_COOKIE')
-
-headers = { "cookie": f"__Secure-3PSID={cookie_value}" }
-ytmusic = YTMusic(headers)
+# This single line now handles the login by reading the browser.json file.
+ytmusic = YTMusic("browser.json")
 
 @app.route('/')
 def home():
@@ -31,4 +29,4 @@ def get_stream_url(video_id):
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 81)))
-  
+    
